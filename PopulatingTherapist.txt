@@ -1,0 +1,7 @@
+INSERT INTO Therapist (title, name, email, location, years_of_practice, availability)  
+VALUES  
+    ('Dr.', 'Julius Hibbert', 'jhibbert@springfieldclinic.com', 'Springfield Hospital', 25, TRUE),  
+    ('Dr.', 'Nick Riviera', 'drnick@budgetcare.com', 'Discount Medical Center', 5, FALSE),  
+    ('Ms.', 'Edna Krabappel', 'ekrabappel@springfieldelementary.com', 'Springfield Elementary', 15, TRUE),  
+    ('Mr.', 'Seymour Skinner', 'sskinner@springfieldelementary.com', 'Springfield School District', 20, TRUE),  
+    ('Dr.', 'Marvin Monroe', 'mmunroe@therapycenter.com', 'Monroe Family Therapy', 30, FALSE);  

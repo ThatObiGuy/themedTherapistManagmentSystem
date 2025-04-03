@@ -1,0 +1,10 @@
+INSERT INTO Client (name, email, phone_number, regularity)  
+VALUES  
+    ('Homer Simpson', 'homer.simpson@springfield.com', '555-1234', TRUE),  
+    ('Marge Simpson', 'marge.simpson@springfield.com', '555-5678', TRUE),  
+    ('Bart Simpson', 'bart.simpson@springfield.com', '555-9101', FALSE),  
+    ('Lisa Simpson', 'lisa.simpson@springfield.com', '555-1122', TRUE),  
+    ('Maggie Simpson', 'maggie.simpson@springfield.com', '555-3344', FALSE),  
+    ('Ned Flanders', 'ned.flanders@springfield.com', '555-5566', TRUE),  
+    ('Mr. Burns', 'mr.burns@springfield.com', '555-7788', FALSE),  
+    ('Moe Szyslak', 'moe.szyslak@springfield.com', '555-9900', TRUE);  
