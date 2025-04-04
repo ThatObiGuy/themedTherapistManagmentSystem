@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #87CEEB; /* Light blue background */
+  padding: 10px 0;
+}
+
+.nav-item {
+  position: relative;
+  text-align: center;
+}
+
+.cloud-icon {
+  width: 20%;
+  height: auto;
+}
+
+.nav-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFD90F; /* Simpsons yellow */
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.nav-button:hover {
+  background-color: #FFC107; /* Slightly darker yellow on hover */
+}

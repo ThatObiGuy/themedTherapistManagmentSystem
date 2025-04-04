@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Spinner Rack Pro BB';
+    src: url('../assets/fonts/SpinnerRackProBB.otf') format('opentype');
+}
+
+h1 {
+    font-family: 'Spinner Rack Pro BB', sans-serif;
+    color: #FFD90F; /* Simpsons yellow */
+    text-shadow: 3px 3px 0 #000; /* Black outline for the text */
+}
+
+.login-container {
+    text-align: center;
+    padding: 20px;
+}
+  
+.login-container button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
