@@ -23,11 +23,18 @@ exports.createTherapist = (req, res) => {
 exports.updateTherapist = (req, res) => {
     const { id } = req.params; // Get the ID of the therapist from the URL
     const { title, name, email, location, years_of_practice, availability } = req.body; // Get the data from the request
-    db.query('UPDATE Therapist SET Title = ?, Name = ?, Email = ?, Location = ?, YearsOfPractice = ?, Availability = ? WHERE TherapistID = ?', 
-    [title, name, email, location, years_of_practice, availability, id], (err, results) => {
-        if (err) throw err;
-        if (err) console.log(data.toString());
-    });
+    db.query(
+        'UPDATE Therapist SET title = ?, name = ?, email = ?, location = ?, years_of_practice = ?, availability = ? WHERE therapist_id = ?',
+        [title, name, email, location, years_of_practice, availability, id],
+        (err, results) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Error updating therapist');
+            } else {
+                res.status(200).send('Therapist updated successfully');
+            }
+        }
+    );
 };
 
 // Delete Therapist by ID
