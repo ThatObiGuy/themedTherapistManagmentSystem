@@ -1,0 +1,60 @@
+.clientPage { /* Class name for the whole therapist page */
+    display: flex; /* Flexbox layout for sidebar and content */
+}
+
+.content { /* Class name for content - The title and table */
+    width: 84vw;
+    padding: 5px; /* Add padding inside the content div */
+}
+
+.sidebar { /* Class name for the sidebar */
+    width: 16vw;
+    height: 80vh; /* Adjust height to not overlap with navbar */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    background: #68AEDF; /* Homer's pants colour */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    padding: 5px; /* Add padding inside the sidebar */
+    overflow: hidden; /* Prevent content from spilling out */
+    border-left: 5px solid #4B90B1; /* like the shade from homer's pants */
+}
+
+.sidebar h2 {
+    color: #000000;
+    text-align: center;
+    background: #ffffff;
+}
+
+.therapistTable { /* Class name for the therapist table */
+    display : flex; /* Use flexbox for layout */
+}
+
+table {
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 5px; /* Adjust spacing as needed */
+}
+
+

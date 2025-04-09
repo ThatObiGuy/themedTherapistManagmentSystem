@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../axiosConfig';
+import TherapistTable from '../../components/TherapistTable';
+import TherapistForm from '../../components/TherapistForm';
 import './TherapistPage.css';
 
 
@@ -10,39 +12,74 @@ const TherapistPage = () => {
 
     // Fetch therapists from the backend
     useEffect(() => {
-        const fetchTherapists = async () => {
-            try {
-                const response = await axios.get('/api/therapists');
-                setTherapists(response.data);
-            } catch (error) {
-                console.error('Error fetching therapists:', error);
-            }
-        };
-        fetchTherapists();
+        retrieveTherapists();
     }, []); // actives on load
+
+    const retrieveTherapists = async () => {
+        try {
+            const response = await axios.get('/api/therapists');
+            setTherapists(response.data);
+        } catch (error) {
+            console.error('Error fetching therapists:', error);
+        }
+    };
 
     // Handle row click
     const handleRowClick = (therapist) => {
         setSelectedTherapist(therapist); // Set the selected therapist
+        console.log("Selected therapist:", therapist); // Log the selected therapist
+    };
+
+    const [newTherapist, setNewTherapist] = useState({
+        id: null,
+        title: "",
+        name: "",
+        email: "",
+        location: "",
+        years_of_practice: "",
+        availability: "true",
+    });
+    
+    const handleCreateTherapist = async (e) => {
+        e.preventDefault(); // Prevent default form submission
+        try {
+            await axios.post('/api/therapists', {
+                ...newTherapist,
+                availability: newTherapist.availability === "true",
+            });
+            alert("Therapist created successfully!");
+            setNewTherapist({
+                title: "",
+                name: "",
+                email: "",
+                location: "",
+                years_of_practice: "",
+                availability: "true",
+            }); // Reset form
+            retrieveTherapists()
+        } catch (error) {
+            console.error("Error creating therapist:", error);
+            alert("Failed to create therapist.");
+        }
     };
 
     const handleUpdateTherapist = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent default form submission
         try {
-            await axios.put(`/api/therapists/${selectedTherapist.id}`, selectedTherapist);
+            await axios.put(`/api/therapists/${selectedTherapist.therapist_id}`, selectedTherapist);
             alert("Therapist updated successfully!");
-            
+            retrieveTherapists()
         } catch (error) {
             console.error("Error updating therapist:", error);
             alert("Failed to update therapist.");
         }
     };
 
-    const handleDeleteTherapist = async (id) => {
+    const handleDeleteTherapist = async () => {
         try {
-            await axios.delete(`/api/therapists/${id}`);
-            setTherapists(therapists.filter((therapist) => therapist.id !== id)); // Remove the deleted therapist from the list
+            await axios.delete(`/api/therapists/${selectedTherapist.therapist_id}`);
             alert("Therapist deleted successfully!");
+            retrieveTherapists() // not working
         } catch (error) {
             console.error("Error deleting therapist:", error);
             alert("Failed to delete therapist.");
@@ -51,136 +88,33 @@ const TherapistPage = () => {
 
     return (
         <div className="therapistPage">
+
             {/* Sidebar */}
             <div className="sidebar">
-            {selectedTherapist ? (
-                <div className="therapistDetails">
-                    <h2>Details</h2>
-                    <form onSubmit={(e) => handleUpdateTherapist(e)}>
-                        <label>
-                            <strong>Title:</strong>
-                            <input
-                                type="text"
-                                value={selectedTherapist.title}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        title: e.target.value,
-                                    })
-                                }
-                            />
-                        </label>
-                        <label>
-                            <strong>Name:</strong>
-                            <input
-                                type="text"
-                                value={selectedTherapist.name}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        name: e.target.value,
-                                    })
-                                }
-                            />
-                        </label>
-                        <label>
-                            <strong>Email:</strong>
-                            <input
-                                type="email"
-                                value={selectedTherapist.email}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        email: e.target.value,
-                                    })
-                                }
-                            />
-                        </label>
-                        <label>
-                            <strong>Location:</strong>
-                            <input
-                                type="text"
-                                value={selectedTherapist.location}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        location: e.target.value,
-                                    })
-                                }
-                            />
-                        </label>
-                        <label>
-                            <strong>Years of Practice:</strong>
-                            <input
-                                type="number"
-                                value={selectedTherapist.years_of_practice}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        years_of_practice: e.target.value,
-                                    })
-                                }
-                            />
-                        </label>
-                        <label>
-                            <strong>Availability:</strong>
-                            <select
-                                value={selectedTherapist.availability}
-                                onChange={(e) =>
-                                    setSelectedTherapist({
-                                        ...selectedTherapist,
-                                        availability: e.target.value === "true",
-                                    })
-                                }
-                            >
-                                <option value="true">Available</option>
-                                <option value="false">Unavailable</option>
-                            </select>
-                        </label>
-                        <div className="formButtons">
-                            <button id="update" type="submit">Update</button>
-                            <button id="delete" type="button" onClick={() => handleDeleteTherapist(selectedTherapist.id)}>Delete</button>
-                            <button id="cancel" type="button" onClick={() => setSelectedTherapist(null)}>Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            ) : (
-                <h2>Details</h2>
-            )}
-        </div>
+                {selectedTherapist ? (
+                    <TherapistForm
+                        therapist={selectedTherapist}
+                        setTherapist={setSelectedTherapist}
+                        onSubmit={handleUpdateTherapist}
+                        isEditMode={true}
+                        onDelete={() => handleDeleteTherapist(selectedTherapist)}
+                        onCancel={() => setSelectedTherapist(null)}
+                    />
+                ) : (
+                    <TherapistForm
+                        therapist={newTherapist}
+                        setTherapist={setNewTherapist}
+                        onSubmit={handleCreateTherapist}
+                        isEditMode={false}
+                    />
+                )}
+            </div>
 
             {/* Main Content */}
             <div className="content">
                 <h1>Therapist Page</h1>
                 <div className="therapistTable">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Location</th>
-                                <th>Years of Practice</th>
-                                <th>Availability</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {therapists.map((therapist) => (
-                                <tr 
-                                    key={therapist.id} 
-                                    onClick={() => handleRowClick(therapist)} 
-                                    className="clickable-row"
-                                >
-                                    <td>{therapist.title}</td>
-                                    <td>{therapist.name}</td>
-                                    <td>{therapist.email}</td>
-                                    <td>{therapist.location}</td>
-                                    <td>{therapist.years_of_practice}</td>
-                                    <td>{therapist.availability ? 'Available' : 'Unavailable'}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <TherapistTable therapists={therapists} onRowClick={handleRowClick} />
                 </div>
             </div>
         </div>

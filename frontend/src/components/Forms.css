@@ -1,0 +1,23 @@
+.formButtons {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column;
+    justify-content: center; /* Center the buttons vertically */
+    padding: 5px;
+    gap: 10px; /* Space between buttons */
+    margin-top: 10px; /* Space above the buttons */
+}
+
+#createUpdate {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#delete {
+    background-color: red;
+    color: white;
+}
+
+#cancel {
+    background-color: yellow;
+    color: black;
+}

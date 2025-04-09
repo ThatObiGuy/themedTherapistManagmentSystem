@@ -3,12 +3,12 @@
 }
 
 .content { /* Class name for content - The title and table */
-    width: 85vw;
+    width: 84vw;
     padding: 5px; /* Add padding inside the content div */
 }
 
 .sidebar { /* Class name for the sidebar */
-    width: 15vw;
+    width: 16vw;
     height: 80vh; /* Adjust height to not overlap with navbar */
     display: flex;
     flex-direction: column; /* Stack elements vertically */
@@ -17,30 +17,6 @@
     padding: 5px; /* Add padding inside the sidebar */
     overflow: hidden; /* Prevent content from spilling out */
     border-left: 5px solid #4B90B1; /* like the shade from homer's pants */
-}
-
-.formButtons {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column;
-    justify-content: center; /* Center the buttons vertically */
-    padding: 5px;
-    gap: 10px; /* Space between buttons */
-    margin-top: 10px; /* Space above the buttons */
-}
-
-#update {
-    background-color: cornflowerblue;
-    color: white;
-}
-
-#delete {
-    background-color: red;
-    color: white;
-}
-
-#cancel {
-    background-color: yellow;
-    color: black;
 }
 
 .sidebar h2 {
@@ -74,5 +50,11 @@ tr:hover {
     cursor: pointer;
 }
 
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 5px; /* Adjust spacing as needed */
+}
 
 

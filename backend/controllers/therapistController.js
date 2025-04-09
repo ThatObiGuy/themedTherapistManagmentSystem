@@ -12,7 +12,7 @@ exports.retrieveTherapists = (req, res) => {
 // Create a new Therapist
 exports.createTherapist = (req, res) => {
     const { title, name, email, location, years_of_practice, availability } = req.body; // Get the data from the request
-    db.query('INSERT INTO Therapist (Title, Name, Email, Location, YearsOfPractice, Availability) VALUES (?, ?, ?, ?, ?, ?)', 
+    db.query('INSERT INTO Therapist (Title, Name, Email, Location, years_of_practice, Availability) VALUES (?, ?, ?, ?, ?, ?)', 
     [title, name, email, location, years_of_practice, availability], (err, results) => { // Perform an SQL query
         if (err) throw err;
         if (err) console.log(data.toString());
@@ -40,7 +40,7 @@ exports.updateTherapist = (req, res) => {
 // Delete Therapist by ID
 exports.deleteTherapist = (req, res) => {
     const { id } = req.params; // Get the ID of the therapist from the URL
-    db.query('DELETE FROM Therapist WHERE TherapistID = ?', [id], (err, results) => { // Perform an SQL query
+    db.query('DELETE FROM Therapist WHERE therapist_id = ?', [id], (err, results) => { // Perform an SQL query
         if (err) throw err; 
         if (err) console.log(data.toString());
     });
